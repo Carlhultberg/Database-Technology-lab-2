@@ -10,12 +10,10 @@ class Database():
         self.cursor = self.connection.cursor()
 
 
-
     def select(self, command):
 
         self.cursor.execute(command)
         return self.cursor.fetchall()
-
 
 
 db = Database("localhost", "dbname", "hejsan", "1234")

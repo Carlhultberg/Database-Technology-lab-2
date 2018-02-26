@@ -1,0 +1,45 @@
+CREATE TABLE Persons (
+  Staff_ID INT NOT NULL,
+  FirstName varchar(255),
+  LastName varchar(255),
+  Company_Name varchar(255),
+  Partner_Name VARCHAR(255) UNIQUE,
+  PRIMARY KEY (Staff_ID)
+);
+
+CREATE TABLE Team (
+  Team_ID INT NOT NULL,
+  Staff_ID INT NOT NULL,
+  FOREIGN KEY (Staff_ID) REFERENCES Persons(Staff_ID)
+);
+
+CREATE TABLE Facilities (
+  Room_ID INT NOT NULL,
+  Stuff VARCHAR(255),
+  Cost INT NOT NULL,
+  PRIMARY KEY(Room_ID)
+);
+
+CREATE TABLE Resources (
+  Room_ID INT NOT NULL,
+  IsBooked INT NOT NULL DEFAULT '0',
+  FOREIGN KEY (Room_ID) REFERENCES Facilities(Room_ID)
+);
+
+CREATE TABLE Has_Meeting (
+  Meeting_ID INT NOT NULL,
+  StartTime TIME(0) NOT NULL,
+  EndTime TIME(0) NOT NULL,
+  Staff_ID INT NOT NULL,
+  FirstName VARCHAR(255),
+  LastName VARCHAR(255),
+  Room_ID INT NOT NULL,
+  Partner_Name VARCHAR(255) UNIQUE,
+  FOREIGN KEY (Staff_ID) REFERENCES Persons(Staff_ID),
+  FOREIGN KEY (Room_ID) REFERENCES Facilities(Room_ID)
+);
+
+CREATE TABLE CostLog(
+  Log_of_Cost INT,
+  Team_ID INT NOT NULL
+);

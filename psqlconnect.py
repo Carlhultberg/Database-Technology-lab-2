@@ -15,6 +15,5 @@ class Database():
         self.cursor.execute(command)
         return self.cursor.fetchall()
 
-
-db = Database("localhost", "dbname", "hejsan", "1234")
-pprint.pprint(db.select("SELECT * FROM dbname"))
+db = Database("localhost", "room_booking", "annahedstrom", "")
+pprint.pprint(db.select("SELECT * FROM person"))

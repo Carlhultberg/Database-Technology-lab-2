@@ -127,7 +127,7 @@ class Personal_Details():
         self.confirm_booking_buttom = Button(self.frame, text="Confirm Team", command=self.choose_team)
         self.confirm_booking_buttom.grid(row=40, column=0)
 
-        cur.execute("SELECT staff_id, fname, lname FROM person")
+        cur.execute("SELECT staff_id, fname, lname FROM person WHERE staff_id != 1000")
         self.person = cur.fetchall()
 
         column = 0
@@ -135,13 +135,6 @@ class Personal_Details():
             self.all_persons.insert(END, i)
             column += 1
 
-        cur.execute("SELECT team_id, team_name FROM team")
-        self.team = cur.fetchall()
-
-        column1 = 0
-        for i in self.team:
-            self.all_teams.insert(END, i)
-            column1 += 1
 
     def show(self):
         self.frame.grid(row=0, column=0)
@@ -161,6 +154,14 @@ class Personal_Details():
         # print("person index:", self.name_selections, ": '%s'" % self.staff_id[0])
         self.staff_id = str(self.staff_id[0])
 
+        cur.execute("SELECT team_id, team_name FROM team WHERE team_id != 1000")
+        self.team = cur.fetchall()
+
+        column1 = 0
+        for i in self.team:
+            self.all_teams.insert(END, i)
+            column1 += 1
+
         cur.execute("SELECT booking_id FROM current_bookings ORDER BY booking_id ASC")
         self.id = cur.fetchall()[-1]
         id = str(self.id[0])
@@ -175,6 +176,7 @@ class Personal_Details():
         self.team_selections = [int(x) + 1 for x in self.team_selections]
         # print("team index:", self.team_selections, ": '%s'" % self.team_id[0])
         self.team_id = str(self.team_id[0])
+
 
         cur.execute("SELECT booking_id FROM current_bookings ORDER BY booking_id ASC")
         self.id = cur.fetchall()[-1]

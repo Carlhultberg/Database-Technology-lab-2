@@ -1,1 +1,3 @@
-# lab2
+# lab
+
+Assignment in database technology. 
